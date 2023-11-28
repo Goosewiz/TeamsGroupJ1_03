@@ -1,7 +1,9 @@
-package dateInfo;
+package gusev.java23.j1_03.task1.date_info;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.TemporalAdjuster;
+import java.time.temporal.TemporalAdjusters;
 
 // Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
 // then press Enter. You can now see whitespace characters in your code.
@@ -21,9 +23,9 @@ public class MonthInfo {
         return dtf.format(date);
     }
 
-    public String getMonthNumber() {
+    public int getMonthNumber() {
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("M");
-        return dtf.format(date);
+        return Integer.parseInt(dtf.format(date));
     }
 
     public String getTypeOfFirstDay() {
@@ -31,15 +33,18 @@ public class MonthInfo {
         LocalDate date = this.date.withDayOfMonth(1);
         return dtf.format(date);
     }
-    public String getLastDayDate(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-d");
+    public LocalDate getLastDayDate(){
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         LocalDate date = this.date.plusMonths(1).withDayOfMonth(1).minusDays(1);
-        return dtf.format(date);
+        return date;
     }
-    public String getNumberOfDays(){
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("d");
-        LocalDate date = this.date.plusMonths(1).withDayOfMonth(1).minusDays(1);
-        return dtf.format(date);
+    public int getNumberOfDays(){
+        //LocalDate today = this.date;
+        //today.with(TemporalAdjusters.lastDayOfMonth());
+        LocalDate info = getLastDayDate();
+        String answer = info.toString();
+        answer = answer.substring(answer.length()-2, answer.length());
+        return Integer.parseInt(answer);
     }
     public String getYearAndQuarter(){
         DateTimeFormatter dtf1 = DateTimeFormatter.ofPattern("Q");
